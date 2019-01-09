@@ -20,13 +20,13 @@ class PosterController extends Controller
 
     public function show()
     {
-        $posts = Poster::all();
+        $posts = Poster::latest()->paginate(20);
         return view('poster::show', compact('posts'));
     }
 
     public function send(PosterRequest $request)
     {
         Poster::storeAndNotify($request);
-        return redirect(route('post.index'))->with('message', 'Posting done');
+        return redirect(route('poster.index'))->with('message', 'Posting done');
     }
 }

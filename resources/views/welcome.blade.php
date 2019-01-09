@@ -6,7 +6,8 @@
         <div class="card">
             <div class="card-body">
                 @include('poster::includes.flash')
-                <form method="post" action="{{ route('post.send') }}" enctype="multipart/form-data">
+                <h3>Publish Posts at Once</h3>
+                <form method="post" action="{{ route('poster.send') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="content">Content of Post</label>
@@ -37,7 +38,8 @@
                         <label class="form-check-label" for="facebook">Flock</label>
                     </div> --}}
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        <a href={{ route('poster.show') }} class="btn btn-sm btn-info float-right">Show All</a>
                     </div>
                 </form>
             </div>

@@ -19,9 +19,7 @@ class PosterServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/poster.php', 'poster');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'poster');
         $this->addConfigs();
-        $this->publishes([
-            __DIR__ . '/Http/routes.php' => base_path('routes/Poster.php'),
-        ], 'poster:routes');
+        $this->publishThings();
     }
 
     /**
@@ -44,9 +42,9 @@ class PosterServiceProvider extends ServiceProvider
             if (!$this->app->routesAreCached()) {
                 require in_array('Poster.php', $appRouteDir) ? base_path('routes/Poster.php') : $path;
             }
+        } else {
+            require $path;
         }
-        // dd($path);
-        require $path;
     }
 
     /**
@@ -67,6 +65,16 @@ class PosterServiceProvider extends ServiceProvider
         $services             = config('services');
         $services['twitter']  = config('poster.services.twitter');
         $services['facebook'] = config('poster.services.facebook');
+    }
+
+    public function publishTHings()
+    {
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/poster'),
+        ], 'poster:views');
+        $this->publishes([
+            __DIR__ . '/Http/routes.php' => base_path('routes/Poster.php'),
+        ], 'poster:routes');
     }
 
     /**

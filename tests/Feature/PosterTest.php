@@ -15,7 +15,7 @@ class PosterTest extends TestCase
     public function it_shows_post_page()
     {
         $this->authUser();
-        $this->get(route('post.index'))
+        $this->get(route('poster.index'))
         ->assertOk()
         ->assertSee('Write something to post');
     }
@@ -25,7 +25,7 @@ class PosterTest extends TestCase
     {
         $user = $this->authUser();
         Notification::fake();
-        $this->post(route('post.send'), [
+        $this->post(route('poster.send'), [
             'content' => 'This is content',
             'via'     => ['twitter', 'facebook']
         ]);
@@ -37,7 +37,7 @@ class PosterTest extends TestCase
     {
         $this->authUser();
         $this->withExceptionHandling();
-        $res = $this->post(route('post.send'));
+        $res = $this->post(route('poster.send'));
         $res->assertSessionHasErrors(['content', 'via']);
     }
 
@@ -48,7 +48,7 @@ class PosterTest extends TestCase
         Storage::fake('image');
         Notification::fake();
 
-        $this->post(route('post.send'), [
+        $this->post(route('poster.send'), [
             'content' => 'This is content',
             'via'     => ['twitter'],
             'image'   => UploadedFile::fake()->image('image.jpg')
@@ -63,7 +63,7 @@ class PosterTest extends TestCase
         $this->authUser();
         Notification::fake();
 
-        $res = $this->post(route('post.send'), [
+        $res = $this->post(route('poster.send'), [
             'content' => 'This is content',
             'via'     => ['twitter'],
             'image'   => UploadedFile::fake()->image('image.jpg')
@@ -80,18 +80,18 @@ class PosterTest extends TestCase
         $this->authUser();
         Notification::fake();
 
-        $res = $this->post(route('post.send'), [
+        $res = $this->post(route('poster.send'), [
             'content' => 'This is content',
             'via'     => ['twitter'],
             'image'   => UploadedFile::fake()->image('image.jpg')
         ]);
 
-        $res = $this->post(route('post.send'), [
+        $res = $this->post(route('poster.send'), [
             'content' => 'This is content 2',
             'via'     => ['twitter'],
             'image'   => UploadedFile::fake()->image('image.jpg')
         ]);
 
-        $this->get(route('post.show'))->assertSee('This is content 2');
+        $this->get(route('poster.show'))->assertSee('This is content 2');
     }
 }
