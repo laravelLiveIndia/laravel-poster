@@ -19,6 +19,9 @@ class PosterServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/poster.php', 'poster');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'poster');
         $this->addConfigs();
+        $this->publishes([
+            __DIR__ . '/Http/routes.php' => base_path('routes/Poster.php'),
+        ], 'poster:routes');
     }
 
     /**
@@ -31,6 +34,19 @@ class PosterServiceProvider extends ServiceProvider
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
         });
+    }
+
+    protected function loadRoutesFrom($path)
+    {
+        $routeDir = base_path('routes');
+        if (file_exists($routeDir)) {
+            $appRouteDir = scandir($routeDir);
+            if (!$this->app->routesAreCached()) {
+                require in_array('Poster.php', $appRouteDir) ? base_path('routes/Poster.php') : $path;
+            }
+        }
+        // dd($path);
+        require $path;
     }
 
     /**

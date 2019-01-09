@@ -45,6 +45,10 @@ class PosterNotification extends Notification
             $channels[] = FacebookPosterChannel::class;
         }
 
+        // if (in_array('flock', $this->via)) {
+        //     $channels[] = F::class;
+        // }
+
         return $channels;
     }
 

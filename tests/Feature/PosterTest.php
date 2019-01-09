@@ -53,7 +53,7 @@ class PosterTest extends TestCase
             'via'     => ['twitter'],
             'image'   => UploadedFile::fake()->image('image.jpg')
         ]);
-        $image = Poster::first()->image;
+        $image = Poster::first()->getOriginal('image');
         Storage::assertExists($image);
     }
 

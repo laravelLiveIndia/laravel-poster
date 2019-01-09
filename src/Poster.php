@@ -36,4 +36,14 @@ class Poster extends Model
             $this->image           = $path;
         }
     }
+
+    public function getImageAttribute($value)
+    {
+        return $this->attributes['image'] = url('storage/' . str_replace('public/', '', $value));
+    }
+
+    public function getViaAttribute($value)
+    {
+        return $this->attributes['via'] = json_decode($value);
+    }
 }

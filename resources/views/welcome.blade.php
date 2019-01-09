@@ -14,8 +14,10 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input type="file" accept="image/x-png,image/gif,image/jpeg" name="image" class="custom-file-input" id="inputGroupFile02">
-                            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose image if any</label>
+                            <input type="file" accept="image/x-png,image/gif,image/jpeg" name="image" class="custom-file-input"
+                                id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose
+                                image if any</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -29,6 +31,11 @@
                         <input type="checkbox" class="form-check-input" value="facebook" id="facebook" name="via[]">
                         <label class="form-check-label" for="facebook">Facebook</label>
                     </div>
+                    
+                    {{-- <div class="form-group form-check-inline">
+                        <input type="checkbox" class="form-check-input" value="flock" id="flock" name="via[]">
+                        <label class="form-check-label" for="facebook">Flock</label>
+                    </div> --}}
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
@@ -37,4 +44,5 @@
         </div>
     </div>
 </div>
+
 @endsection
