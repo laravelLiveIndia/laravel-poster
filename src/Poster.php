@@ -4,6 +4,7 @@ namespace Laravellive\Poster;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravellive\Poster\Notifications\PosterNotification;
+use Illuminate\Support\Facades\Storage;
 
 class Poster extends Model
 {
@@ -11,21 +12,28 @@ class Poster extends Model
 
     public static function storeAndNotify($request)
     {
-        (new static)->store($request);
+        (new static)->saveImage($request);
         (new static)->notify($request);
+        (new static)->store($request);
     }
 
     protected function store($request)
     {
         $this->content  = $request->content;
         $this->via      = json_encode($request->via);
-        $this->saveImage($request);
+        $this->image    = $request->image_path;
         $this->save();
     }
 
     protected function notify($request)
     {
-        auth()->user()->notify(new PosterNotification($request));
+        try {
+            auth()->user()->notify(new PosterNotification($request));
+        } catch (\Throwable $th) {
+            // deleting uploaded image if something wrong happens
+            Storage::delete($request->image_path);
+            throw $th;
+        }
     }
 
     protected function saveImage($request)
@@ -33,7 +41,6 @@ class Poster extends Model
         if ($request->hasFile('image')) {
             $path                  = $request->image->store('public');
             $request['image_path'] = $path;
-            $this->image           = $path;
         }
     }
 

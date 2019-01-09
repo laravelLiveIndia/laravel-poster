@@ -20,8 +20,11 @@ After installing it, you need to configure each social platform keys and token t
 Each plaform have its different settings so you need to read carefully the documentations of each one.
 
 This package uses Laravel Notification to send every post. So read every package documentation for more information
-For Twitter : `https://github.com/laravel-notification-channels/twitter`
-For Facebook : `https://github.com/laravel-notification-channels/facebook-poster`
+
+For Twitter : [https://github.com/laravel-notification-channels/twitter](https://github.com/laravel-notification-channels/twitter)
+
+For Facebook :
+[https://github.com/laravel-notification-channels/facebook-poster](https://github.com/laravel-notification-channels/facebook-poster)
 
 ## Sending Post
 

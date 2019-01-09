@@ -16,9 +16,8 @@ class PosterServiceProvider extends ServiceProvider
     {
         $this->registerRoutes();
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-        $this->mergeConfigFrom(__DIR__ . '/../config/poster.php', 'poster');
+        // $this->mergeConfigFrom(__DIR__ . '/../config/poster.php', 'poster');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'poster');
-        $this->addConfigs();
         $this->publishThings();
     }
 
@@ -60,14 +59,7 @@ class PosterServiceProvider extends ServiceProvider
         ];
     }
 
-    public function addConfigs()
-    {
-        $services             = config('services');
-        $services['twitter']  = config('poster.services.twitter');
-        $services['facebook'] = config('poster.services.facebook');
-    }
-
-    public function publishTHings()
+    public function publishThings()
     {
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/poster'),
