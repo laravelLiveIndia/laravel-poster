@@ -4,17 +4,15 @@ namespace Laravellive\Poster\Tests\Feature;
 
 use Laravellive\Poster\Tests\TestCase;
 
-class ExampleTest extends TestCase
+class TwitterTest extends TestCase
 {
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testBasicTest()
+    public function testExample()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->assertTrue(true);
     }
 }

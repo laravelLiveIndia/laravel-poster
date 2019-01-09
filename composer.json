@@ -10,6 +10,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "laravel-notification-channels/facebook-poster": "^1.4",
         "laravel-notification-channels/twitter": "^2.0"
     },
     "require-dev": {
